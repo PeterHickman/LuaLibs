@@ -1,0 +1,14 @@
+As per PiL
+
+function Account:new (o)
+    local o = o or {}
+    setmetatable(o, self)
+	self.__index = self
+	return o
+end
+
+a = Account:new{balance = 0}
+a:deposit(100.00)
+
+b = Account:new()
+print(b.balance)    --> 0
