@@ -1,5 +1,8 @@
 /*
  * gcc -Wall -shared -fPIC -o time_now.so -llua time_now.c
+ *
+ * This is an unusual case. I need the current time, down to microseconds,
+ * as a string for things like logs. Not something that Lua is good at.
  */
 
 #define LUA_LIB
@@ -35,6 +38,6 @@ static int time_now (lua_State *L) {
 }
 
 int luaopen_time_now(lua_State *L){
-  lua_register(L,"time_now", time_now);
+  lua_register(L, "time_now", time_now);
   return 0;
 }
