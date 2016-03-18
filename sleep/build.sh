@@ -1,4 +1,6 @@
 #!/bin/sh
 
-gcc -Wall -bundle -undefined dynamic_lookup -o msleep.so msleep.c
-mv msleep.so /usr/local/lib/lua/5.1/msleep.so
+APP=msleep
+
+gcc -Wall -bundle -undefined dynamic_lookup -o $APP.so $APP.c
+mv $APP.so /usr/local/lib/lua/5.1/$APP.so

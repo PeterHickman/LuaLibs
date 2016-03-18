@@ -1,4 +1,6 @@
 #!/bin/sh
 
-gcc -Wall -bundle -undefined dynamic_lookup -o time_now.so time_now.c
-mv time_now.so /usr/local/lib/lua/5.1/time_now.so
+APP=time_now
+
+gcc -Wall -bundle -undefined dynamic_lookup -o $APP.so $APP.c
+mv $APP.so /usr/local/lib/lua/5.1/$APP.so
