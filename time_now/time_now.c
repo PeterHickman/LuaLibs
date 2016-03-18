@@ -1,6 +1,4 @@
 /*
- * gcc -Wall -shared -fPIC -o time_now.so -llua time_now.c
- *
  * This is an unusual case. I need the current time, down to microseconds,
  * as a string for things like logs. Not something that Lua is good at.
  */
