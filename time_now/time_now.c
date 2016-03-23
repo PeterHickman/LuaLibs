@@ -8,6 +8,7 @@
 #include "lauxlib.h"
 
 #include <stdio.h>
+#include <time.h>
 #include <sys/time.h>
 
 #define BUFFER_SIZE 64
