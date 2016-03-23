@@ -31,6 +31,12 @@ static int time_now (lua_State *L) {
 
   snprintf(buffer + LENGTH_OF_DATE_TIME, LENGTH_OF_MS, ".%06ld", ms);
 
+  long x = timezone / 60;
+  long m = x % 60;
+  long h = x / 60;
+
+  snprintf(buffer + LENGTH_OF_DATE_TIME + LENGTH_OF_MS - 1, 8, " %+03ld:%02ld", h, m);
+
   lua_pushstring(L, buffer);
 
   return 1;
