@@ -8,6 +8,7 @@
 #include "lauxlib.h"
 
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 #include <sys/time.h>
 
@@ -16,28 +17,31 @@
 #define LENGTH_OF_MS 8
 
 static int time_now (lua_State *L) {
-  char buffer[BUFFER_SIZE];
+  char buffer1[BUFFER_SIZE];
+  char buffer2[BUFFER_SIZE];
   struct tm* tm_info;
   struct timeval tv;
-  long int ms;
 
   gettimeofday(&tv, NULL);
 
   tm_info = localtime(&tv.tv_sec);
 
-  strftime(buffer, BUFFER_SIZE, "%Y-%m-%dT%H:%M:%S", tm_info);
+  /*
+   * The time with a placeholder for the microseconds
+   */
+  strftime(buffer1, BUFFER_SIZE, "%Y-%m-%dT%H:%M:%S.XXXXXX %z", tm_info);
 
-  ms = (long int)tv.tv_usec % 1000000;
+  /*
+   * Get the microseconds
+   */
+  snprintf(buffer2, LENGTH_OF_MS, ".%06ld", (long int)tv.tv_usec % 1000000);
 
-  snprintf(buffer + LENGTH_OF_DATE_TIME, LENGTH_OF_MS, ".%06ld", ms);
+  /*
+   * Assemble the final string
+   */
+  strncpy(buffer1 + LENGTH_OF_DATE_TIME, buffer2, LENGTH_OF_MS - 1);
 
-  long x = timezone / 60;
-  long m = x % 60;
-  long h = x / 60;
-
-  snprintf(buffer + LENGTH_OF_DATE_TIME + LENGTH_OF_MS - 1, 8, " %+03ld:%02ld", h, m);
-
-  lua_pushstring(L, buffer);
+  lua_pushstring(L, buffer1);
 
   return 1;
 }
