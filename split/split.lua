@@ -11,22 +11,22 @@
 -- split(',2,3', ',') => { '', '2', '3' }
 
 function split(s, m)
-	assert(m ~= '', "The marker cannot be an empty string")
+  assert(m ~= '', "The marker cannot be an empty string")
 
-	local start = 1
-	local match_start, match_end = 1, 1
-	local t = {}
+  local start = 1
+  local match_start, match_end = 1, 1
+  local t = {}
 
-	while match_start ~= nil do
-		match_start, match_end = s:find(m, start, true)
+  while match_start ~= nil do
+    match_start, match_end = s:find(m, start, true)
 
-		if match_start ~= nil then
-			t[#t + 1] = s:sub(start, match_start - 1)
-			start = match_end + 1
-		end
-	end
+    if match_start ~= nil then
+      t[#t + 1] = s:sub(start, match_start - 1)
+      start = match_end + 1
+    end
+  end
 
-	t[#t + 1] = s:sub(start)
+  t[#t + 1] = s:sub(start)
 
-	return t
+  return t
 end

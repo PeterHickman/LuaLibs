@@ -3,26 +3,26 @@ require 'split'
 test_number = 0
 
 function test(s, m, r)
-	local x = split(s, m)
-	local ok = true
+  local x = split(s, m)
+  local ok = true
 
-	test_number = test_number + 1
+  test_number = test_number + 1
 
-	if #x == #r then
-		for k,v in pairs(x) do
-			if v ~= r[k] then
-				print(test_number .. " Mismatched element " .. v .. " is not " .. r[k])
-				ok = false
-			end
-		end
-	else
-		print(test_number .. " Size not matched " .. #x .. " and " .. #r)
-		ok = false
-	end
+  if #x == #r then
+    for k,v in pairs(x) do
+      if v ~= r[k] then
+        print(test_number .. " Mismatched element " .. v .. " is not " .. r[k])
+        ok = false
+      end
+    end
+  else
+    print(test_number .. " Size not matched " .. #x .. " and " .. #r)
+    ok = false
+  end
 
-	if ok then
-		print(test_number .. " Ok")
-	end
+  if ok then
+    print(test_number .. " Ok")
+  end
 end
 
 test("1x234x5556",'x', {'1', '234', '5556'})
