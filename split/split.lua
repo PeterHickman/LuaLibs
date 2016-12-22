@@ -1,6 +1,6 @@
 -- Split string *s* on marker *m* returning a table of the
 -- resulting elements. The marker can be anything except
--- the empty string.
+-- the empty string or nil.
 --
 -- split('1,2,3', ',') => { '1', '2', '3' }
 --
@@ -11,7 +11,7 @@
 -- split(',2,3', ',') => { '', '2', '3' }
 
 function split(s, m)
-  assert(m ~= '', "The marker cannot be an empty string")
+  assert(m ~= '' and m ~= nil, "The marker cannot be an empty string")
 
   local start = 1
   local match_start, match_end = 1, 1
